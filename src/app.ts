@@ -4,7 +4,6 @@ import helmet from 'helmet';
 import compression from 'compression';
 import compressFilter from './utils/compressFilter.util';
 import config from './config/config';
-import logger from './middleware/logger';
 
 const app: Express = express();
 
@@ -23,7 +22,6 @@ app.use(helmet());
 app.use(compression({ filter: compressFilter }));
 
 app.get('/', (_req: Request, res: Response) => {
-  logger.error('askdhfkasdf');
   res.send('Hello World!');
 });
 
