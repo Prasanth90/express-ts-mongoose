@@ -11,6 +11,7 @@
     "dev": "tsc --project './tsconfig.json' --watch &NODE_ENV=development nodemon ./dist/index.js",
     "build": "tsc --project './tsconfig.json'",
     "start": "yarn run build && NODE_ENV=production node ./dist/index.js",
+    "start:dev": "yarn run build && NODE_ENV=development node ./dist/index.js",
     "watch": "tsc --project './tsconfig.json' --watch",
     "lint": "eslint src/**/*.{ts}",
     "lint:fix": "eslint --fix --ext src/**/*.ts",
