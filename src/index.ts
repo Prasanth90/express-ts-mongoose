@@ -14,6 +14,7 @@ mongoose
     server = app.listen(parseInt(config.port), () => {
       logger.log('info', `Server is running on Port: ${config.port}`);
     });
+    return;
   })
   .catch((e) => {
     console.log(e, 'Mongo error');

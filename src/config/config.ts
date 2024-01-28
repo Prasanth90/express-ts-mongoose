@@ -10,6 +10,8 @@ const config = {
   port: process.env.PORT,
   cors_origin: process.env.CORS_ORIGIN,
   mongo_url: process.env['MONGO_URL'] || '',
+  mongo_username: process.env['MONGO_USERNAME'] || '',
+  mongo_password: process.env['MONGO_PASSWORD'] || '',
 };
 
 export default config;
