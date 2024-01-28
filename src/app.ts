@@ -2,8 +2,10 @@ import express, { Express, Request, Response } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import compression from 'compression';
+
 import compressFilter from './utils/compressFilter.util';
 import config from './config/config';
+import buildTripRoutes from './routes/trips';
 
 const app: Express = express();
 
@@ -24,5 +26,7 @@ app.use(compression({ filter: compressFilter }));
 app.get('/', (_req: Request, res: Response) => {
   res.send('Hello World!');
 });
+
+buildTripRoutes(app);
 
 export default app;
