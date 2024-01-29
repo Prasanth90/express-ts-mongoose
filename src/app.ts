@@ -7,12 +7,20 @@ import compressFilter from './utils/compressFilter.util';
 import config from './config/config';
 import buildTripRoutes from './routes/trips';
 
+import { auth } from 'express-oauth2-jwt-bearer';
+
+const jwtCheck = auth({
+  audience: config.audience,
+  issuerBaseURL: config.issuer_base_url,
+  tokenSigningAlg: 'RS256',
+});
+
 const app: Express = express();
 
 app.use(
   cors({
     // origin is given a array if we want to have multiple origins later
-    origin: [config.cors_origin],
+    origin: [config.cors_origin, config.fe_base_url],
     credentials: true,
   })
 );
@@ -27,6 +35,6 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
-buildTripRoutes(app);
+buildTripRoutes(app, jwtCheck);
 
 export default app;

@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Trip, TripModel } from '../models/trip';
 import type { Express, Request, Response } from 'express';
 
-function buildTripRoutes(app: Express) {
-  app.get('/trips', async (_req: Request, res: Response): Promise<Response> => {
+function buildTripRoutes(app: Express, jwtCheck: any) {
+  app.get('/trips', jwtCheck, async (_req: Request, res: Response): Promise<Response> => {
     const allTrips: Trip[] = await TripModel.find();
     await TripModel.create({
       duration: 5,
