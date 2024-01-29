@@ -12,9 +12,9 @@ const config = {
   mongo_url: process.env['MONGO_URL'] || '',
   mongo_username: process.env['MONGO_USERNAME'] || '',
   mongo_password: process.env['MONGO_PASSWORD'] || '',
-  fe_base_url: process.env.AUTH0_BASE_URL || '',
-  issuer_base_url: process.env.ISSUER_BASE_URL || '',
-  audience: process.env.AUDIENCE || '',
+  fe_base_url: process.env['AUTH0_BASE_URL'] || '',
+  issuer_base_url: process.env['ISSUER_BASE_URL'] || '',
+  audience: process.env['AUDIENCE'] || '',
 };
 
 export default config;
