@@ -7,7 +7,7 @@ import compressFilter from './utils/compressFilter.util';
 import config from './config/config';
 import buildTripRoutes from './routes/trips';
 
-import { auth } from 'express-oauth2-jwt-bearer';
+import { auth, claimIncludes } from 'express-oauth2-jwt-bearer';
 
 const jwtCheck = auth({
   audience: config.audience,
@@ -35,6 +35,6 @@ app.get('/', (_req: Request, res: Response) => {
   res.send('Hello World!');
 });
 
-buildTripRoutes(app, jwtCheck);
+buildTripRoutes(app, jwtCheck, claimIncludes);
 
 export default app;

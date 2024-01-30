@@ -2,16 +2,21 @@
 import { Trip, TripModel } from '../models/trip';
 import type { Express, Request, Response } from 'express';
 
-function buildTripRoutes(app: Express, jwtCheck: any) {
-  app.get('/trips', jwtCheck, async (_req: Request, res: Response): Promise<Response> => {
-    const allTrips: Trip[] = await TripModel.find();
-    await TripModel.create({
-      duration: 5,
-      name: 'Northern Lights',
-      isCarTrip: true,
-    });
-    return res.status(200).json(allTrips);
-  });
+function buildTripRoutes(app: Express, jwtCheck: any, claimIncludes: any) {
+  app.get(
+    '/trips',
+    jwtCheck,
+    claimIncludes('permissions', 'read:user-inspirations'),
+    async (_req: Request, res: Response): Promise<Response> => {
+      const allTrips: Trip[] = await TripModel.find();
+      await TripModel.create({
+        duration: 5,
+        name: 'Northern Lights',
+        isCarTrip: true,
+      });
+      return res.status(200).json(allTrips);
+    }
+  );
 
   app.get('/trips/:id', async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
@@ -33,8 +38,8 @@ function buildTripRoutes(app: Express, jwtCheck: any) {
 
   app.delete('/trips/:id', async (req: Request, res: Response): Promise<Response> => {
     const { id } = req.params;
-    const deletedDog: Trip | null = await TripModel.findOneAndDelete({ id });
-    return res.status(200).json(deletedDog);
+    const deletedTrip: Trip | null = await TripModel.findOneAndDelete({ id });
+    return res.status(200).json(deletedTrip);
   });
 }
 
